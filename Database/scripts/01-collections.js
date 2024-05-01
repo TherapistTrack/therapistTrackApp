@@ -2,6 +2,8 @@ db = db.getSiblingDB('therapisttrack');
 
 db.createCollection("Rol");
 db.createCollection("Usuario");
+db.createCollection("Archivo");
+db.createCollection("Expediente");
 
 
 db.runCommand({
@@ -74,13 +76,62 @@ db.runCommand({
     validationLevel: "moderate"
 } );
 
-
+db.runCommand({
+    collMod:"Archivo",
+    validator: { $jsonSchema: {
+        bsonType: "object",
+        required: [ "nombre", "categoria", "localizacion", "metadata", "no_paginas", "fecha_creacion", "fecha_sesion"],
+        properties: {
+            nombre: {
+                bsonType: "string",
+                description: "must be a string and is required"
+            },
+            categoria: {
+                bsonType: "string",
+                description: "must be a string and is required"
+            },
+            localizacion: {
+                bsonType: "string",
+                description: "must be a string and is required"
+            },
+            metadata: {
+                bsonType: "object",
+                required: ["nombre", "valor"],
+                properties: {
+                    nombre: {
+                        bsonType: "string",
+                        description: "must be a string and is required"
+                    },
+                    valor: {
+                        bsonType: "object",
+                        description: "must be a object and is required"
+                    },
+                }
+            },
+            no_paginas: {
+                bsonType: "integer",
+                description: "must be a integer and is required"
+            },
+            fecha_creacion: {
+                bsonType: "string",
+                description: "must be a string and is required"
+            },
+            fecha_sesion: {
+                bsonType: "string",
+                description: "must be a string and is required"
+            },
+            etiquetas: {
+                bsonType: "string",
+                description: "must be a string and is required"
+            },
+        }
+    } },
+    validationLevel: "moderate"
+});
 
 
 
 /**
-    db.createCollection('Paciente');
-    db.createCollection('Hijos');
     db.createCollection('Escolaridad');
     db.createCollection('Doctor');
     db.createCollection('PDF');
