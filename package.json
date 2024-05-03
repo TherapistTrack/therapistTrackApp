@@ -12,9 +12,12 @@
     "frontend:dev": "npm run dev -w Frontend",
     "frontend:build": "npm run build - Frontend",
     "frontend:preview": "npm run build - Frontend",
-    "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore",
-    "format": "prettier --write src/",
-    "prepare": "husky"
+    "prepare": "husky",
+    "lint": "npx eslint '**/*.{js,jsx,ts,tsx,vue}'",
+    "lint:fix": "npm run lint -- --fix",
+    "prettier": "prettier '**/*.{js,jsx,ts,tsx}' --check",
+    "prettier:fix": "npm run prettier -- --write",
+    "format": "npm run prettier:fix && npm run lint:fix"
   },
   "license": "ISC",
   "devDependencies": {
