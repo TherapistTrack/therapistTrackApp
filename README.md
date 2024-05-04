@@ -1,7 +1,5 @@
 <div align = "center">
-  <img src="./media/wireWizLogo.png" width="100px"><h1 align="center"> 
-  <h1 align="center" style="font-style:italic;">
-  TherapistTrack</h1>
+  <img src="./TherapistTrackLogo.png" width="370px"><h1 align="center"> 
     <h5 align="center"> <i style="color:grey;"> 
    A medical records storage system</i> </h5>
 </div>
