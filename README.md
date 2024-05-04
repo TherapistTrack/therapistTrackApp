@@ -71,7 +71,7 @@ Alternatively, the project is configure to run the backend and database in docke
 ## Contributors
 
 <div align="center"> 
-<a href="https://github.com/DanielRasho/TherapistTrack/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=DanielRasho/TherapistTrack" />
+<a href="https://github.com/TherapistTrack/therapistTrackApp/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=TherapistTrack/therapistTrackApp" />
 </a>
 </div>
