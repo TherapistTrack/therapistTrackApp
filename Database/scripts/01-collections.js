@@ -10,15 +10,33 @@ db.runCommand({
   validator: {
     $jsonSchema: {
       bsonType: 'object',
-      required: ['nombre', 'permisos'],
+      required: ['name', 'permissions'],
       properties: {
-        nombre: {
+        name: {
           bsonType: 'string',
-          description: 'must be a string and is required'
+          description: "Role's name"
         },
-        edad: {
-          bsonType: 'object',
-          description: 'must be a object and is required'
+        permissions: {
+          bsonType: 'array',
+          items: {
+            type: 'object',
+            description: 'Representation of a permission on a collection',
+            required: ['collection', 'operations'],
+            properties: {
+              collection: {
+                bsonType: 'string',
+                description:
+                  'Name of the collection in which permissions are defined'
+              },
+              operations: {
+                bsonType: 'array',
+                items: {
+                  bsonType: 'string',
+                  enum: ['CREATE', 'READ', 'UPDATE', 'DELETE']
+                }
+              }
+            }
+          }
         }
       }
     }
@@ -27,59 +45,74 @@ db.runCommand({
 })
 
 db.runCommand({
-  collMod: 'Usuario',
+  collMod: 'User',
   validator: {
     $jsonSchema: {
       bsonType: 'object',
       required: [
-        'usuario',
-        'contraseña',
+        'username',
+        'password',
         'salt',
-        'nombre',
-        'apellidos',
-        'telefonos',
-        'rol'
+        'name',
+        'lastName',
+        'phones',
+        'rol',
+        'mails'
       ],
       properties: {
-        usuario: {
-          bsonType: 'string',
-          description: 'must be a string and is required'
+        username: {
+          bsonType: 'string'
         },
-        contraseña: {
-          bsonType: 'string',
-          description: 'must be a string and is required'
+        password: {
+          bsonType: 'string'
         },
         salt: {
-          bsonType: 'string',
-          description: 'must be a string and is required'
+          bsonType: 'string'
         },
-        telefonos: {
+        name: {
+          bsonType: 'string',
+          description: 'User names'
+        },
+        lastName: {
+          bsonType: 'string',
+          description: 'User lastnames'
+        },
+        phones: {
           bsonType: 'array',
-          description: 'must be a array and is required'
+          description: 'Phones to contact this user'
         },
         rol: {
-          bsonType: 'object',
-          description: 'must be a object and is required'
+          bsonType: 'objectId',
+          description: "User's Rol on app"
         },
-        Especialidad: {
-          bsonType: 'string',
-          description: 'must be a string and is required'
-        },
-        Correos: {
+        mails: {
           bsonType: 'array',
-          description: 'must be a array and is required'
+          description: 'Mails to contact this user',
+          items: {
+            bsonType: 'string'
+          }
         },
-        fechaInicio: {
+        // Doctor Data
+        collegiateNumber: {
           bsonType: 'string',
-          description: 'must be a string and is required'
+          description: 'DPI equivalent for doctors'
         },
-        fechaFinal: {
+        specialty: {
           bsonType: 'string',
-          description: 'must be a string and is required'
+          description: "Doctor's Specialty"
         },
-        dpi: {
+        // Assistant Data
+        startDate: {
+          bsonType: 'date',
+          description: 'Date in which Assistant started to work'
+        },
+        endDate: {
+          bsonType: 'date',
+          description: 'Date in which Assistant end to work'
+        },
+        DPI: {
           bsonType: 'string',
-          description: 'must be a string and is required'
+          description: 'Assistant DPI'
         }
       }
     }

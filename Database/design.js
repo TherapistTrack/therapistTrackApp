@@ -7,45 +7,45 @@ const rol = [
     name: 'Admin',
     permissions: [
       {
-        collection: 'usuario',
+        collection: 'User',
         operations: ['CREATE', 'READ', 'UPDATE']
       },
       {
-        collection: 'rol',
+        collection: 'Rol',
         operations: ['READ', 'UPDATE']
       }
     ]
   },
   {
-    nombre: 'Doctor',
+    name: 'Doctor',
     permissions: [
       {
-        collection: 'paciente',
+        collection: 'Patient',
         operations: ['CREATE', 'READ', 'UPDATE', 'DELETE']
       },
       {
-        collection: 'expediente',
+        collection: 'Expedient',
         operations: ['CREATE', 'READ', 'UPDATE', 'DELETE']
       },
       {
-        collection: 'archivo',
+        collection: 'File',
         operations: ['CREATE', 'READ', 'UPDATE', 'DELETE']
       }
     ]
   },
   {
-    nombre: 'Asistente',
+    name: 'Assistant',
     permissions: [
       {
-        collection: 'paciente',
+        collection: 'Patient',
         operations: ['READ', 'UPDATE']
       },
       {
-        collection: 'expediente',
+        collection: 'Expedient',
         operations: ['READ']
       },
       {
-        collection: 'archivo',
+        collection: 'File',
         operations: ['READ']
       }
     ]
@@ -65,7 +65,7 @@ const USER = {
 
   // Doctor:
   collegiateNumber: '',
-  Specialty: '',
+  specialty: '',
 
   // asistente
   startDate: '',
@@ -73,17 +73,17 @@ const USER = {
   DPI: ''
 }
 
-const Field = {
-  name: '',
-  type: ['SHORT_TEXT', 'TEXT', 'DATE', 'NUMBER', 'FLOAT'],
-  value: ''
-}
-
 // A DOCTOR MUST HAVE JUST ONE PATIENT_TEMPLATE
 const PatientTemplate = {
   doctor: Object.id(/* DOCTORS COLLECTION */),
   fields: [
-    /* FIELDS COLLECTION */
+    /* LIST OF COLLECTIONS OF FIELDS */
+    /* with this format: */
+    {
+      name: '',
+      type: '', // Can be on of these: ['SHORT_TEXT', 'TEXT', 'DATE', 'NUMBER', 'FLOAT'],
+      value: ''
+    }
   ],
   lastUpdated: Date()
 }
