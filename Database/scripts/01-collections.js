@@ -2,7 +2,6 @@ db = db.getSiblingDB('therapisttrack')
 
 db.createCollection('Rol')
 db.createCollection('User')
-db.createCollection('Field')
 db.createCollection('PatientTemplate')
 db.createCollection('Patient')
 
@@ -89,38 +88,82 @@ db.runCommand({
 })
 
 db.runCommand({
-  collMod: 'Field',
+  collMod: 'PatientTemplate',
   validator: {
     $jsonSchema: {
       bsonType: 'object',
-      required: ['name', 'type', 'value'],
+      required: ['doctor', 'lastUpdatd', 'fields'],
       properties: {
-        name: {
-          bsonType: 'string',
-          description: 'Name of the field property'
+        doctor: {
+          bsonType: 'objectId',
+          description: 'The Doctor who owns this template'
         },
-        type: {
-          bsonType: 'string',
-          enum: ['SHORT_TEXT', 'TEXT', 'DATE', 'NUMBER', 'FLOAT'],
-          description:
-            'Type of data that will be stored on this property (number, string, date...)'
+        lastUpdate: {
+          bsonType: 'date',
+          description: 'Last time the doctor updated the template'
         },
-        value: {}
+        fields: {
+          bsonType: 'array',
+          description: 'Fields that a patient most have.',
+          items: {
+            bsonType: 'object',
+            required: ['name', 'type', 'value'],
+            properties: {
+              name: {
+                bsonType: 'string',
+                description: 'Name of the field property'
+              },
+              type: {
+                bsonType: 'string',
+                enum: ['SHORT_TEXT', 'TEXT', 'DATE', 'NUMBER', 'FLOAT'],
+                description:
+                  'Type of data that will be stored on this property (string, date...)'
+              },
+              value: {}
+            }
+          }
+        }
       }
     }
   },
   validationLevel: 'moderate'
 })
 
-/**
-    db.createCollection('Paciente');
-    db.createCollection('Hijos');
-    db.createCollection('Escolaridad');
-    db.createCollection('Doctor');
-    db.createCollection('PDF');
-    db.createCollection('metadata');
-    db.createCollection('Expediente');
-    db.createCollection('Categorias');
-    db.createCollection('Etiquetas');
-    db.createCollection('Documentos');
- */
+db.runCommand({
+  collMod: 'Patient',
+  validator: {
+    $jsonSchema: {
+      bsonType: 'object',
+      required: [
+        'names',
+        'lastNames',
+        'lastUpdated',
+        'PATIENT_TEMPLATE',
+        'fields'
+      ],
+      properties: {
+        names: {
+          bsonType: 'string',
+          description: "Patient's names"
+        },
+        lastNames: {
+          bsonType: 'string',
+          description: "Patient's lastNames"
+        },
+        lastUpdated: {
+          bsonType: 'date',
+          description: 'Last time the data of this patient was updated'
+        },
+        PATIENT_TEMPLATE: {
+          bsonType: 'objectId',
+          description: 'References PatientTemplate Id'
+        },
+        fields: {
+          bsonType: 'object',
+          description: 'collection of fields, of a patient.'
+        }
+      }
+    }
+  },
+  validationLevel: 'moderate'
+})
