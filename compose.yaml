@@ -1,0 +1,33 @@
+name: therapist-track
+
+services:
+
+  database: 
+    image: mongo
+    ports:
+      - 27017:27017
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root 
+      MONGO_INITDB_ROOT_PASSWORD: password
+      MONGO_INITDB_DATABASE: therapisttrack
+    volumes:
+      - ./Database/scripts:/docker-entrypoint-initdb.d/
+      - mongo_data:/data/db
+        
+  backend: 
+    build: 
+      context: ./Backend
+      dockerfile: Dockerfile
+    ports:
+      - 3001:3001
+    volumes:
+      - node_modules:/backend/node_modules
+    depends_on:
+      - database
+
+
+volumes:
+  mongo_data:
+    driver: local
+  node_modules:
+    driver: local
