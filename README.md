@@ -1,7 +1,5 @@
 <div align = "center">
-  <img src="./media/wireWizLogo.png" width="100px"><h1 align="center"> 
-  <h1 align="center" style="font-style:italic;">
-  TherapistTrack</h1>
+  <img src="./TherapistTrackLogo.png" width="370px"><h1 align="center"> 
     <h5 align="center"> <i style="color:grey;"> 
    A medical records storage system</i> </h5>
 </div>
@@ -27,17 +25,38 @@ An application specialized for storing psycolocial patient records. This repo co
 
 ## Getting Started
 
-#### Database
+For setting up the project to start developing follow the steps below:
 
-For running the database you should have **Docker compose** installed then just run
+### 📦 Setup Dependencies
 
-- **Starting the DB**
+- **Installing dependencies**
+  
+  ```bash
+  npm install
+  ```
+
+- **Running different services**
+  
+  ```bash
+  npm run backend:start    <- Starts the backend service
+  npm run frontend:dev     <- Starts web server running frontend
+  npm run frontend:build   <- Compiles Vue project
+  npm run frontend:preview <- Preview compiled Vue project
+  ```
+
+### 🐋 Setup Docker containers
+
+Alternatively, the project is configure to run the backend and database in docker containers and is the <u>recomended way to run and test this services</u> rather than use `npm scripts`. You should have **Docker compose** installed, then just run:
+
+
+
+- **Starting containers**
   
   ```bash
   docker compose up -d
   ```
 
-- **Stopping DB**
+- **Stopping containers**
   
   ```bash
   docker compose down
@@ -46,11 +65,13 @@ For running the database you should have **Docker compose** installed then just 
 - **Stopping and deleting volumes**
   
   ```bash
-  docker compose down -v
+  docker compose down -v 
   ```
 
 ## Contributors
 
-<a href="https://github.com/DanielRasho/TherapistTrack/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=DanielRasho/TherapistTrack" />
+<div align="center"> 
+<a href="https://github.com/TherapistTrack/therapistTrackApp/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=TherapistTrack/therapistTrackApp" />
 </a>
+</div>

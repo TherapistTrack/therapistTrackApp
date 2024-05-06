@@ -1,71 +1,101 @@
+/* eslint-disable no-unused-vars */
 // Paciente, expedientes, archivos
 
-// ROL 
-{
-    nombre: "Admin";
-    permisos : [
-        {
-            collecion : "usuario",
-            permisos: ["CREATE", "READ", "UPDATE"]
-        },
-        {
-            collecion : "rol",
-            permisos: ["READ", "UPDATE"]
-        }
+// ROL
+const rol = [
+  {
+    name: 'Admin',
+    permissions: [
+      {
+        collection: 'User',
+        operations: ['CREATE', 'READ', 'UPDATE']
+      },
+      {
+        collection: 'Rol',
+        operations: ['READ', 'UPDATE']
+      }
     ]
-    nombre: "Doctor";
-    permisos : [
-        {
-            collecion : "paciente",
-            permisos: ["CREATE", "READ", "UPDATE", "DELETE"]
-        },
-        {
-            collecion : "expediente",
-            permisos: ["CREATE", "READ", "UPDATE", "DELETE"]
-        },
-        {
-            collecion : "archivo",
-            permisos: ["CREATE", "READ", "UPDATE", "DELETE"]
-        }
+  },
+  {
+    name: 'Doctor',
+    permissions: [
+      {
+        collection: 'Patient',
+        operations: ['CREATE', 'READ', 'UPDATE', 'DELETE']
+      },
+      {
+        collection: 'Expedient',
+        operations: ['CREATE', 'READ', 'UPDATE', 'DELETE']
+      },
+      {
+        collection: 'File',
+        operations: ['CREATE', 'READ', 'UPDATE', 'DELETE']
+      }
     ]
-    nombre: "Asistente";
-    permisos : [
-        {
-            collecion : "paciente",
-            permisos: ["READ", "UPDATE"]
-        },
-        {
-            collecion : "expediente",
-            permisos: ["READ"]
-        },
-        {
-            collecion : "archivo",
-            permisos: ["READ"]
-        }
+  },
+  {
+    name: 'Assistant',
+    permissions: [
+      {
+        collection: 'Patient',
+        operations: ['READ', 'UPDATE']
+      },
+      {
+        collection: 'Expedient',
+        operations: ['READ']
+      },
+      {
+        collection: 'File',
+        operations: ['READ']
+      }
     ]
+  }
+]
+
+// User
+const USER = {
+  username: '',
+  password: '',
+  salt: '',
+  name: '',
+  lastName: '',
+  phones: ['', '', ''],
+  rol: Object.ID(),
+  mails: ['', ''],
+
+  // Doctor:
+  collegiateNumber: '',
+  specialty: '',
+
+  // asistente
+  startDate: '',
+  endDate: '',
+  DPI: ''
 }
 
-// Usuario
-{
-    usuario: "",
-    contraseña: "",
-    salt: "", 
-    nombre: "",
-    apellidos: ""
-    telefonos: [ "", "", ""]
-    rol: Object.ID(),
-
-    // Doctor:
-    noColegiado: "",
-    Especialidad: "",
-    Correos: ["", ""],
-
-    //asistente
-    Correos: ['',''],
-    fechaInicio: '',
-    fechaFinal: '',
-    dpi: '',    
-
+// A DOCTOR MUST HAVE JUST ONE PATIENT_TEMPLATE
+const PatientTemplate = {
+  doctor: Object.id(/* DOCTORS COLLECTION */),
+  fields: [
+    /* LIST OF COLLECTIONS OF FIELDS */
+    /* with this format: */
+    {
+      name: '',
+      type: '', // Can be on of these: ['SHORT_TEXT', 'TEXT', 'DATE', 'NUMBER', 'FLOAT'],
+      value: ''
+    }
+  ],
+  lastUpdated: Date()
 }
 
-
+const Patient = {
+  names: '',
+  lastNames: '',
+  lastUpdated: Date(),
+  PATIENT_TEMPLATE: Object.id(/* PATIENT TEMPLATE */),
+  fields: {
+    // Containt fields defined in PATIENT_TEMPLATE
+    Partner: '',
+    Children: ''
+  }
+}
