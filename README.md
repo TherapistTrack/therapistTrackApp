@@ -1,7 +1,5 @@
 <div align = "center">
-  <img src="./media/wireWizLogo.png" width="100px"><h1 align="center"> 
-  <h1 align="center" style="font-style:italic;">
-  TherapistTrack</h1>
+  <img src="./TherapistTrackLogo.png" width="370px"><h1 align="center"> 
     <h5 align="center"> <i style="color:grey;"> 
    A medical records storage system</i> </h5>
 </div>
@@ -73,7 +71,7 @@ Alternatively, the project is configure to run the backend and database in docke
 ## Contributors
 
 <div align="center"> 
-<a href="https://github.com/DanielRasho/TherapistTrack/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=DanielRasho/TherapistTrack" />
+<a href="https://github.com/TherapistTrack/therapistTrackApp/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=TherapistTrack/therapistTrackApp" />
 </a>
 </div>
