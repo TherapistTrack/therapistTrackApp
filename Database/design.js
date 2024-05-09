@@ -82,7 +82,9 @@ const PatientTemplate = {
     {
       name: '',
       type: '', // Can be on of these: ['SHORT_TEXT', 'TEXT', 'DATE', 'NUMBER', 'FLOAT'],
-      value: ''
+      value: '',
+      required: '', // Boolean
+      description: ''
     }
   ],
   lastUpdated: Date()
@@ -98,4 +100,29 @@ const Patient = {
     Partner: '',
     Children: ''
   }
+}
+
+const File = {
+  name: '', 
+  Record: [Object.id(/* Record */)],
+  category: '', 
+  location: '', // Location of the file
+  metadata: {
+    name: '', // Name of the metadata
+    value: {}, // Value of the metadata
+    type: '', // Can be on of these: ['SHORT_TEXT', 'TEXT', 'DATE', 'NUMBER', 'FLOAT']
+    required: '', // Boolean
+    description: ''
+  },
+  pages: 0, // Number of pages in the file, 0 is the default value
+  created_at: Date(), // Date when the file was created
+  labels: '' // Labels associated with the file
+}
+
+
+const Record = {
+  patient: Object.id(/* PATIENT */),
+  doctor: Object.id(/* DOCTOR */),
+  lastUpdated: Date(),
+  inquiries_number: 0,  // Number of inquiries in the record, 0 is the default value
 }

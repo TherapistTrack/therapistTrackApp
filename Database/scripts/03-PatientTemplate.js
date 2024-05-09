@@ -7,7 +7,7 @@ db.runCommand({
   validator: {
     $jsonSchema: {
       bsonType: 'object',
-      required: ['doctor', 'lastUpdatd', 'fields'],
+      required: ['doctor', 'lastUpdate', 'fields'],
       properties: {
         doctor: {
           bsonType: 'objectId',
@@ -31,10 +31,16 @@ db.runCommand({
               type: {
                 bsonType: 'string',
                 enum: ['SHORT_TEXT', 'TEXT', 'DATE', 'NUMBER', 'FLOAT'],
-                description:
-                  'Type of data that will be stored on this property (string, date...)'
+                description:'Type of data that will be stored on this property (string, date...)'
               },
-              value: {}
+              value: {},
+              required: {
+                bsonType: 'bool',
+                description: 'Orders if this field is required or not'
+              },
+              description: {
+                bsonType: 'string',
+              }
             }
           }
         }
