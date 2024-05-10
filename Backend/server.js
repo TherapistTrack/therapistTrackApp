@@ -5,7 +5,7 @@ const upload = require('./src/utils/multerConfig')
 const authenticate = require('./src/utils/authentication')
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcrypt')
-const { findUsuario, Usuario } = require('./models/dbqueries')
+const { findUsuario, Usuario } = require('./src/models/dbqueries')
 
 app.use(express.json())
 
