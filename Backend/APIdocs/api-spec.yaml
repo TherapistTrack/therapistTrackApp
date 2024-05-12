@@ -1,0 +1,245 @@
+openapi: 3.0.0
+info:
+  title: TherapistTrack
+  version: 1.0.0
+  description: Documentación de API generada por Swagger
+  contact:
+    name: Soporte API
+servers:
+  - url: 'http://localhost:3001'
+
+tags:
+  - name: Autenticación
+    description: Operaciones de autenticación como login y registro.
+  - name: Gestión de usuarios
+    description: Gestión de usuarios, incluyendo registro, actualización y eliminación.
+  - name: Operaciones de archivo
+    description: Operaciones relacionadas con la gestión de archivos.
+
+paths:
+  /upload:
+    post:
+      tags:
+        - Operaciones de archivo
+      summary: Sube un archivo PDF
+      description: Permite a los usuarios subir un archivo PDF al servidor.
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                pdf:
+                  type: string
+                  format: binary
+      responses:
+        '200':
+          description: Archivo subido correctamente.
+        '400':
+          description: Error al subir el archivo.
+
+  /pdf/{filename}:
+    get:
+      tags:
+        - Operaciones de archivo
+      summary: Descarga un archivo PDF
+      description: Permite a los usuarios descargar un archivo PDF por nombre de archivo.
+      parameters:
+        - in: path
+          name: filename
+          schema:
+            type: string
+          required: true
+          description: Nombre del archivo PDF para descargar.
+      responses:
+        '200':
+          description: Archivo descargado correctamente.
+        '404':
+          description: Archivo no encontrado.
+        '500':
+          description: Error al procesar la solicitud.
+
+  /login:
+    post:
+      tags:
+        - Autenticación
+      summary: Inicia sesión
+      description: Permite a los usuarios iniciar sesión proporcionando credenciales.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                password:
+                  type: string
+      responses:
+        '200':
+          description: Login exitoso.
+        '401':
+          description: Credenciales inválidas.
+
+  /user/register:
+    post:
+      tags:
+        - Gestión de usuarios
+      summary: Crear usuario
+      description: Permite a los administradores crear un nuevo usuario en el sistema.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                password:
+                  type: string
+                salt:
+                  type: string
+                name:
+                  type: string
+                lastName:
+                  type: string
+                phones:
+                  type: array
+                  items:
+                    type: string
+                role:
+                  type: string
+                mails:
+                  type: array
+                  items:
+                    type: string
+                collegiateNumber:
+                  type: string
+                specialty:
+                  type: string
+                startDate:
+                  type: string
+                endDate:
+                  type: string
+                DPI:
+                  type: string
+      responses:
+        '200':
+          description: Usuario creado exitosamente.
+        '400':
+          description: Error al crear el usuario.
+
+  /user/delete:
+    delete:
+      tags:
+        - Gestión de usuarios
+      summary: Eliminar usuario
+      description: Cambia el estado de un usuario a inactivo en lugar de eliminar completamente sus datos.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+      responses:
+        '200':
+          description: Usuario desactivado exitosamente.
+        '404':
+          description: Usuario no encontrado.
+
+  /user/update:
+    put:
+      tags:
+        - Gestión de usuarios
+      summary: Actualizar información de usuario
+      description: Permite a los administradores actualizar la información existente de un usuario.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                name:
+                  type: string
+                lastName:
+                  type: string
+                phones:
+                  type: array
+                  items:
+                    type: string
+                collegiateNumber:
+                  type: string
+                specialty:
+                  type: string
+                mails:
+                  type: array
+                  items:
+                    type: string
+                startDate:
+                  type: string
+                endDate:
+                  type: string
+                DPI:
+                  type: string
+      responses:
+        '200':
+          description: Información de usuario actualizada exitosamente.
+        '404':
+          description: Usuario no encontrado.
+
+  /user/list:
+    get:
+      tags:
+        - Gestión de usuarios
+      summary: Listar usuarios
+      description: Recupera una lista de todos los usuarios en el sistema.
+      responses:
+        '200':
+          description: Lista de usuarios recuperada exitosamente.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/UserInfoResponse'
+
+components:
+  schemas:
+    UserInfoResponse:
+      type: object
+      properties:
+        username:
+          type: string
+        name:
+          type: string
+        lastName:
+          type: string
+        phones:
+          type: array
+          items:
+            type: string
+        role:
+          type: string
+        mails:
+          type: array
+          items:
+            type: string
+        collegiateNumber:
+          type: string
+        specialty:
+          type: string
+        startDate:
+          type: string
+        endDate:
+          type: string
+        DPI:
+          type: string
+
