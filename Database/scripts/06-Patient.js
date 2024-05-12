@@ -62,10 +62,6 @@ db.runCommand({
               required: {
                 bsonType: 'bool',
                 description: 'Orders if this field is required or not'
-              },
-              // OPTIONAL
-              description: {
-                bsonType: 'string'
               }
             }
           }

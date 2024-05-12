@@ -4,19 +4,19 @@ The App uses Mongo DB as database. Following is the squema design and relation b
 
 ## Notation
 
-1. **Required Fields** : When an field is obligatory, is preceded by ` • `. Ex: `• name`
+1. **Required Fields** : When an field is obligatory, is preceded by `•`. Ex: `• name`
 
 2. **Foreign Keys**: Are references to documents of other collections. Are denoted as `<<CollectionName>>`. Ex: `<<Rol>>`
 
 3. **Embed Document and Arrays of Documents**: Are denoted as :
-   
+
    ```javascript
    <fieldName> : object
    {
       childAttribute : type
    }
-   
-   // EXAMPLE : 
+
+   // EXAMPLE :
    family : object
    {
       dad : string,
@@ -40,11 +40,11 @@ Below is a a list of examples of the JSON that is expected to be stored in each 
     name: "Admin",
     permissions: [
         {
-            collection: "Record"        
+            collection: "Record"
             operations :["CREATE", "READ","UPDATE", "DELETE"]
         },
         {
-            collection: "File"        
+            collection: "File"
             operations :["CREATE", "DELETE"]
         }
     ]
@@ -63,9 +63,9 @@ Below is a a list of examples of the JSON that is expected to be stored in each 
     lastNames: "Rodriguez Rando",
     mails: ["email1@gmail.com", "hotmail2@hotmail.com"],
     phones: ["32232334", "44442222"],
-    rol: ObjectId("dfd32cak32..54?123/") 
+    rol: ObjectId("dfd32cak32..54?123/")
     // Reference to the _id Rol of Document.
-    roleDependentInfo: ObjectId("asdfsv32;lk") 
+    roleDependentInfo: ObjectId("asdfsv32;lk")
     // Reference to the _id of a Doctor or Assistant Document.
 }
 ```
@@ -150,7 +150,6 @@ Below is a a list of examples of the JSON that is expected to be stored in each 
             options: ["easy", "medium", "hard"],
             value: "easy"
             required: true,
-            description: "How hard this sessions has to the patient."
         },
         {
             name: "Key Words",
@@ -166,38 +165,37 @@ Below is a a list of examples of the JSON that is expected to be stored in each 
 
 ```javascript
 {
-    lastUpdated: "2023-1-2"
-    fields: [
-        {
-            name: "Children",
-            type: "NUMBER",
-            required: false,
-            description: "Number of children the Patient has"
-        },
-        {
-            name: "civil status",
-            type: "CHOICE",
-            options: ["single", "married", "separate"],
-            required: true,
-        },
-    ]
+  lastUpdated: '2023-1-2'
+  fields: [
+    {
+      name: 'Children',
+      type: 'NUMBER',
+      required: false,
+      description: 'Number of children the Patient has'
+    },
+    {
+      name: 'civil status',
+      type: 'CHOICE',
+      options: ['single', 'married', 'separate'],
+      required: true
+    }
+  ]
 }
 ```
 
 ### Patient
 
 ```javascript
-{    
+{
     record: ObjectId("dfasdf"),
     names: "Shinji",
-    lastNames: "Sakamoto",    
+    lastNames: "Sakamoto",
     fields: [
         {
             name: "Children",
             type: "NUMBER",
             value : 3,
             required: false,
-            description: "Number of children the Patient has"
         },
         {
             name: "civil status",
