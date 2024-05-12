@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 
 const connectDB = async () => {
-  const dbUri = 'mongodb://admin:1234@database:27017/therapisttrack'
+  const dbUri = process.env.DB_URI
   try {
     await mongoose.connect(dbUri)
     console.log('Successfully connected to MongoDB')

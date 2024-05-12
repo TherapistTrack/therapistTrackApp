@@ -1,3 +1,4 @@
+require('dotenv').config()
 const express = require('express')
 const path = require('path')
 const app = express()
@@ -10,7 +11,7 @@ const { findUsuario, Usuario } = require('./src/models/dbqueries')
 app.use(express.json())
 
 const SALT_ROUNDS = 10
-const JWT_SECRET = process.env.JWT_SECRET || 'superSecretPassword'
+const JWT_SECRET = process.env.JWT_SECRET
 const JWT_EXPIRES_IN = '1h'
 
 app.post('/upload', upload.single('pdf'), (req, res) => {
@@ -150,7 +151,7 @@ app.post('/login', async (req, res) => {
   }
 })
 
-const PORT = 3000
+const PORT = process.env.API_PORT
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`)
