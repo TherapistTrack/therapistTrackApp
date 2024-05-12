@@ -1,34 +1,36 @@
 db = db.getSiblingDB('therapisttrack')
 
-db.createCollection('FileTemplate')
+db.createCollection('Patient')
 
 db.runCommand({
-  collMod: 'FileTemplate',
+  collMod: 'Patient',
   validator: {
     $jsonSchema: {
       bsonType: 'object',
-      required: ['doctor', 'categories', 'lastUpdate', 'metadata'],
+      required: ['record', 'names', 'lastNames', 'fields'],
       properties: {
-        doctor: {
+        record: {
           bsonType: 'objectId',
-          description: 'The Doctor who owns this template'
+          description: 'Reference to the record this file belongs to'
         },
-        categories: {
-          bsonType: 'array',
-          items: {
-            bsonType: 'string'
-          }
+        names: {
+          bsonType: 'string',
+          description: "Patient's names"
         },
-        lastUpdate: {
+        lastNames: {
+          bsonType: 'string',
+          description: "Patient's lastNames"
+        },
+        lastUpdated: {
           bsonType: 'date',
-          description: 'Last time the doctor updated the template'
+          description: 'Last time the data of this patient was updated'
         },
-        metadata: {
+        fields: {
           bsonType: 'array',
-          description: 'Fields that a patient most have.',
+          description: 'Collection of fields, of a patient.',
           items: {
             bsonType: 'object',
-            required: ['name', 'type', 'required', 'description'],
+            required: ['name', 'type', 'value', 'required'],
             properties: {
               name: {
                 bsonType: 'string',
@@ -47,6 +49,7 @@ db.runCommand({
                 description:
                   'Type of data that will be stored on this property (string, date...)'
               },
+              // OPTIONAL
               options: {
                 bsonType: 'array',
                 description:
@@ -55,10 +58,12 @@ db.runCommand({
                   bsonType: 'string'
                 }
               },
+              value: {},
               required: {
                 bsonType: 'bool',
                 description: 'Orders if this field is required or not'
               },
+              // OPTIONAL
               description: {
                 bsonType: 'string'
               }

@@ -11,11 +11,11 @@ db.runCommand({
         'username',
         'password',
         'salt',
-        'name',
-        'lastName',
+        'names',
+        'lastNames',
         'phones',
         'rol',
-        'mails'
+        'roleDependentInfo'
       ],
       properties: {
         username: {
@@ -27,21 +27,13 @@ db.runCommand({
         salt: {
           bsonType: 'string'
         },
-        name: {
+        names: {
           bsonType: 'string',
           description: 'User names'
         },
-        lastName: {
+        lastNames: {
           bsonType: 'string',
           description: 'User lastnames'
-        },
-        phones: {
-          bsonType: 'array',
-          description: 'Phones to contact this user'
-        },
-        rol: {
-          bsonType: 'objectId',
-          description: "User's Rol on app"
         },
         mails: {
           bsonType: 'array',
@@ -50,27 +42,20 @@ db.runCommand({
             bsonType: 'string'
           }
         },
-        // Doctor Data
-        collegiateNumber: {
-          bsonType: 'string',
-          description: 'DPI equivalent for doctors'
+        phones: {
+          bsonType: 'array',
+          description: 'Phones to contact this user',
+          items: {
+            bsonType: 'string'
+          }
         },
-        specialty: {
-          bsonType: 'string',
-          description: "Doctor's Specialty"
+        rol: {
+          bsonType: 'objectId',
+          description: "User's Rol on app"
         },
-        // Assistant Data
-        startDate: {
-          bsonType: 'date',
-          description: 'Date in which Assistant started to work'
-        },
-        endDate: {
-          bsonType: 'date',
-          description: 'Date in which Assistant end to work'
-        },
-        DPI: {
-          bsonType: 'string',
-          description: 'Assistant DPI'
+        roleDependentInfo: {
+          bsonType: 'objectId',
+          description: "Reference to user's info dependent of the role"
         }
       }
     }

@@ -7,23 +7,19 @@ db.runCommand({
   validator: {
     $jsonSchema: {
       bsonType: 'object',
-      required: ['patient', 'doctor', 'created_at', 'inquiries_number'],
+      required: ['patient', 'doctor', 'createdAt'],
       properties: {
         patient: {
-          bsonType: 'string',
+          bsonType: 'objectId',
           description: 'must be a string and is required'
         },
         doctor: {
-          bsonType: 'string',
+          bsonType: 'objectId',
           description: 'must be a string and is required'
         },
-        created_at: {
-          bsonType: 'string',
+        createdAt: {
+          bsonType: 'date',
           description: 'must be a string and is required'
-        },
-        inquiries_number: {
-          bsonType: 'number',
-          description: 'must be a number and is required'
         }
       }
     }

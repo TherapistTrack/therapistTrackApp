@@ -1,0 +1,115 @@
+@startuml entity
+
+entity Rol {
+    * name : string
+    * permissions : array[object]
+    [
+        \t•collection: string,
+        \t•operations: array[string],
+    ]
+}
+
+entity User {
+    * username : string
+    * password : string
+    * salt : string
+    * names : string
+    * lastNames : string
+    * mails : array[string]
+    * phones : array[string]
+    * rol : <<Rol>>
+    * roleDependentInfo : <<Doctor||Assistant>>
+}
+
+entity Doctor {
+    * user: <<User>>
+    * collegiateNumber
+    * specialty
+    * patientTemplate: <<PatientTemplate>>
+    * fileTemplate: <<FileTemplate>>
+}
+
+entity Assistant {
+    * user: <<User>>
+    * startDate: date
+    * endDate: date
+    * DPI: string
+}
+
+entity Record {
+    * patient : <<Patient>>
+    * doctor : <<Doctor>>
+    * createdAt : date
+}
+
+entity PatientTemplate {
+    * lastUpdate: date
+    * fields: array[object]
+    [
+        \t•name: string
+        \t•type: category
+        \t options: array[string]
+        \t•required: pages
+        \t description: string
+    ]
+}
+
+entity Patient {
+    * record : <<Record>>
+    * names : string
+    * lastNames : string
+    * fields : array[object]
+    [
+        \t•name: string
+        \t•type: category
+        \t options: array[string]
+        \t•value: location
+        \t•required: pages
+        \t•description: string
+    ]
+    
+}
+
+entity FileTemplate {
+    * lastUpdate: date
+    * categories: array[string]
+    * metadata: array[object]
+    [
+        \t•name: string
+        \t•type: category
+        \t options: array[string]
+        \t•required: pages
+        \t description: string
+    ]
+}
+
+entity File {
+    * record : <<Record>>
+    * name : string
+    * category : string
+    * location : string
+    * pages : number
+    * created_at : date
+    * metadata: array[object]
+    [
+        \t•name: string
+        \t•type: category
+        \t options: array[string]
+        \t•value: location
+        \t•required: pages
+        \t•description: string
+    ]
+}
+
+User -l- Rol : > has a
+User -d- Doctor : < is a
+User -d- Assistant : < is a
+
+Record -u- Doctor : < owns
+Record -- File  : < references
+Record -- Patient : < references
+
+Doctor -- FileTemplate : > owns a 
+Doctor -- PatientTemplate : > owns a
+
+@enduml
