@@ -7,12 +7,8 @@ db.runCommand({
   validator: {
     $jsonSchema: {
       bsonType: 'object',
-      required: ['doctor', 'lastUpdatd', 'fields'],
+      required: ['lastUpdate', 'fields'],
       properties: {
-        doctor: {
-          bsonType: 'objectId',
-          description: 'The Doctor who owns this template'
-        },
         lastUpdate: {
           bsonType: 'date',
           description: 'Last time the doctor updated the template'
@@ -22,7 +18,7 @@ db.runCommand({
           description: 'Fields that a patient most have.',
           items: {
             bsonType: 'object',
-            required: ['name', 'type', 'value'],
+            required: ['name', 'type', 'required'],
             properties: {
               name: {
                 bsonType: 'string',
@@ -30,11 +26,32 @@ db.runCommand({
               },
               type: {
                 bsonType: 'string',
-                enum: ['SHORT_TEXT', 'TEXT', 'DATE', 'NUMBER', 'FLOAT'],
+                enum: [
+                  'SHORT_TEXT',
+                  'TEXT',
+                  'DATE',
+                  'NUMBER',
+                  'FLOAT',
+                  'CHOICE'
+                ],
                 description:
                   'Type of data that will be stored on this property (string, date...)'
               },
-              value: {}
+              options: {
+                bsonType: 'array',
+                description:
+                  "if type propertie's = CHOICE, this field provides options that can be choosen",
+                items: {
+                  bsonType: 'string'
+                }
+              },
+              required: {
+                bsonType: 'bool',
+                description: 'Orders if this field is required or not'
+              },
+              description: {
+                bsonType: 'string'
+              }
             }
           }
         }
