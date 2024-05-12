@@ -1,65 +1,63 @@
 db = db.getSiblingDB('therapisttrack')
 
-db.createCollection('Patient')
+db.createCollection('File')
 
 db.runCommand({
-  collMod: 'Patient',
+  collMod: 'File',
   validator: {
     $jsonSchema: {
       bsonType: 'object',
       required: [
-        'names',
-        'lastNames',
-        'lastUpdated',
-        'PATIENT_TEMPLATE',
-        'fields'
+        'name',
+        'category',
+        'location',
+        'pages',
+        'created_at',
+        'FILE_TEMPLATE',
+        'metadata'
       ],
       properties: {
-        names: {
+        name: {
           bsonType: 'string',
-          description: "Patient's names"
+          description: 'must be a string and is required'
         },
-        lastNames: {
+        category: {
           bsonType: 'string',
-          description: "Patient's lastNames"
+          description: 'must be a string and is required'
         },
-        lastUpdated: {
-          bsonType: 'date',
-          description: 'Last time the data of this patient was updated'
+        location: {
+          bsonType: 'string',
+          description: 'must be a string and is required'
         },
-        PATIENT_TEMPLATE: {
-          bsonType: 'objectId',
-          description: 'References PatientTemplate Id'
+        pages: {
+          bsonType: 'number',
+          description: 'must be a number and is required'
         },
-        fields: {
+        created_at: {
+          bsonType: 'string',
+          description: 'must be a string and is required'
+        },
+        FILE_TEMPLATE: {
+          bsonType: 'objectId'
+        },
+        metadata: {
           bsonType: 'array',
-          description: 'collection of fields, of a patient.',
           items: {
             bsonType: 'object',
             required: ['name', 'type', 'value', 'required', 'description'],
             properties: {
               name: {
                 bsonType: 'string',
-                description: 'Name of the field property'
+                description: 'must be a string and is required'
               },
               type: {
                 bsonType: 'string',
-                enum: [
-                  'SHORT_TEXT',
-                  'TEXT',
-                  'DATE',
-                  'NUMBER',
-                  'FLOAT',
-                  'CHOICE'
-                ],
+                enum: ['SHORT_TEXT', 'TEXT', 'DATE', 'NUMBER', 'FLOAT'],
                 description:
                   'Type of data that will be stored on this property (string, date...)'
               },
-              // OPTIONAL
               options: {
                 bsonType: 'array',
-                description:
-                  "if type propertie's = CHOICE, this field provides options that can be choosen",
                 items: {
                   bsonType: 'string'
                 }
@@ -69,7 +67,6 @@ db.runCommand({
                 bsonType: 'bool',
                 description: 'Orders if this field is required or not'
               },
-              // OPTIONAL
               description: {
                 bsonType: 'string'
               }

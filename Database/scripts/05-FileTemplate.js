@@ -6,45 +6,62 @@ db.runCommand({
   collMod: 'FileTemplate',
   validator: {
     $jsonSchema: {
-      //bsonType: 'object', /*Aqui me da error, no entiendo el porque */
-      required: ['doctor', 'lastUpdate', 'fields'],
+      bsonType: 'object',
+      required: ['doctor', 'categories', 'lastUpdate', 'metadata'],
       properties: {
         doctor: {
           bsonType: 'objectId',
           description: 'The Doctor who owns this template'
         },
+        categories: {
+          bsonType: 'array',
+          items: {
+            bsonType: 'string'
+          }
+        },
         lastUpdate: {
           bsonType: 'date',
           description: 'Last time the doctor updated the template'
         },
-        fields: {
+        metadata: {
           bsonType: 'array',
           description: 'Fields that a patient most have.',
           items: {
             bsonType: 'object',
-            required: [
-                "name", 
-                "category", 
-                "location", 
-            ],
+            required: ['name', 'type', 'required', 'description'],
             properties: {
               name: {
                 bsonType: 'string',
                 description: 'Name of the field property'
               },
-              category: {
-                bsonType: {},
-                description: "array of diferents categories that the file can be"
+              type: {
+                bsonType: 'string',
+                enum: [
+                  'SHORT_TEXT',
+                  'TEXT',
+                  'DATE',
+                  'NUMBER',
+                  'FLOAT',
+                  'CHOICE'
+                ],
+                description:
+                  'Type of data that will be stored on this property (string, date...)'
               },
-              location: {},
+              options: {
+                bsonType: 'array',
+                description:
+                  "if type propertie's = CHOICE, this field provides options that can be choosen",
+                items: {
+                  bsonType: 'string'
+                }
+              },
               required: {
                 bsonType: 'bool',
                 description: 'Orders if this field is required or not'
               },
-              required: {
-                bsonType: 'bool',
-                description: 'Orders if this field is required or not'
-              },
+              description: {
+                bsonType: 'string'
+              }
             }
           }
         }

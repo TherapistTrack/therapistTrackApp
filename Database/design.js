@@ -81,8 +81,8 @@ const PatientTemplate = {
     /* with this format: */
     {
       name: '',
-      type: '', // Can be on of these: ['SHORT_TEXT', 'TEXT', 'DATE', 'NUMBER', 'FLOAT'],
-      value: '',
+      type: '', // Can be on of these: ['SHORT_TEXT', 'TEXT', 'DATE', 'NUMBER', 'FLOAT', 'CHOICE'],
+      option: [], // JUST IF TYPE = CHOICE
       required: '', // Boolean
       description: ''
     }
@@ -95,21 +95,30 @@ const Patient = {
   lastNames: '',
   lastUpdated: Date(),
   PATIENT_TEMPLATE: Object.id(/* PATIENT TEMPLATE */),
-  fields: {
+  fields: [
     // Containt fields defined in PATIENT_TEMPLATE
-    Partner: '',
-    Children: ''
-  }
+    {
+      name: '',
+      type: '',
+      options: [''], // if type = CHOICE options must be an array of options,
+      // And value must be a value within the options list.
+      value: '', // The value for this property, can be any type
+      required: '',
+      description: ''
+    }
+  ]
 }
 
 const FileTemplate = {
   doctor: Object.id(/* DOCTOR */),
-  fields: [
+  categories: ['', ''],
+  lastUpdated: Date(),
+  metadata: [
     {
       name: '',
-      category: {},
-      location: '',
-      required: '', // Boolean
+      type: {},
+      required: '',
+      description: '' // Boolean
     }
   ]
 }
@@ -118,24 +127,25 @@ const File = {
   name: '',
   category: '',
   location: '',
+  pages: 0,
+  created_at: Date(),
+  FILE_TEMPLATE: Object.id(/* PATIENT TEMPLATE */),
   metadata: [
     {
       name: '',
-      value: {},
       type: '',
-      required: '', // Boolean
+      options: [''], // if type = CHOICE options must be an array of options,
+      // And value must be a value within the options list.
+      value: '', // The value for this property, can be any type
+      required: '',
       description: ''
     }
-  ],
-  pages: 0,
-  created_at: Date(),
-  labels: []
+  ]
 }
-
 
 const Record = {
   patient: Object.id(/* PATIENT */),
   doctor: Object.id(/* DOCTOR */),
   lastUpdated: Date(),
-  inquiries_number: 0,  // Number of inquiries in the record, 0 is the default value
+  inquiries_number: 0 // Number of inquiries in the record, 0 is the default value
 }
