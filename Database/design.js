@@ -102,21 +102,34 @@ const Patient = {
   }
 }
 
+const FileTemplate = {
+  doctor: Object.id(/* DOCTOR */),
+  fields: [
+    {
+      name: '',
+      category: {},
+      location: '',
+      required: '', // Boolean
+    }
+  ]
+}
+
 const File = {
-  name: '', 
-  Record: [Object.id(/* Record */)],
-  category: '', 
-  location: '', // Location of the file
-  metadata: {
-    name: '', // Name of the metadata
-    value: {}, // Value of the metadata
-    type: '', // Can be on of these: ['SHORT_TEXT', 'TEXT', 'DATE', 'NUMBER', 'FLOAT']
-    required: '', // Boolean
-    description: ''
-  },
-  pages: 0, // Number of pages in the file, 0 is the default value
-  created_at: Date(), // Date when the file was created
-  labels: '' // Labels associated with the file
+  name: '',
+  category: '',
+  location: '',
+  metadata: [
+    {
+      name: '',
+      value: {},
+      type: '',
+      required: '', // Boolean
+      description: ''
+    }
+  ],
+  pages: 0,
+  created_at: Date(),
+  labels: []
 }
 
 

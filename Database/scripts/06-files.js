@@ -4,9 +4,18 @@ db.createCollection('File');
 
 db.runCommand({
     collMod:"File",
-    validator: { $jsonSchema: {
+    validator: { 
+        $jsonSchema: {
         bsonType: "object",
-        required: [ "name", "category", "location", "metadata", "pages", "created_at", "labels"],
+        required: [ 
+            "name", 
+            "category", 
+            "location", 
+            "metadata", 
+            "pages", 
+            "created_at", 
+            "labels"
+        ],
         properties: {
             name: {
                 bsonType: "string",
@@ -24,7 +33,6 @@ db.runCommand({
                 bsonType: "array",
                 items: {
                     bsonType: "object",
-                    required: ["name", "value", "type", "required", "description"],
                     properties: {
                         name: {
                             bsonType: "string",
@@ -42,9 +50,9 @@ db.runCommand({
                         required: {
                             bsonType: 'bool',
                             description: 'Orders if this field is required or not'
-                          },
+                        },
                         description: {
-                        bsonType: 'string',
+                            bsonType: 'string',
                         }
                     }
                 }
