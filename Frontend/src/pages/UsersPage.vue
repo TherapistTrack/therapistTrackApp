@@ -34,7 +34,7 @@
 import { ref, defineProps, onMounted } from 'vue';
 import '../assets/arrow-left-double-fill.svg'
 import '../components/Button.vue'
-import SideBar from '../components/SideBar.vue'
+import SideBar from '../components/sidebar/SideBar.vue'
 import Button from '../components/Button.vue'
 import CustomInput from '../components/CustomInput.vue'
 import Loading from '../components/Loading.vue'
@@ -96,12 +96,13 @@ const handleOpenView = (key) => {
 
 <style>
 #app {
-    height: 100vh;
     width: 100vw;
     padding: 0;
     margin: 0;
     display: flex;
     flex-direction: row;
+    align-items: start;
+    justify-content: start;
     background-color: white;
     font-family: 'MotivaSansMedium'
 }
@@ -109,6 +110,7 @@ const handleOpenView = (key) => {
 .page {
     padding: 2rem;
     padding-top: 3rem;
+    width: 70vw;
 }
 
 .options {
@@ -161,7 +163,7 @@ ul {
     border-left: 1px solid #ccc;
 }
 
-.page .grid-row:hover {
+.page .grid-row:hover:not(:first-child){
     background-color: var(--vt-c-light-yellow-1);
     cursor: pointer;
 }
