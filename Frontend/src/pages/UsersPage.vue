@@ -167,4 +167,13 @@ ul {
     background-color: var(--vt-c-light-yellow-1);
     cursor: pointer;
 }
+@media only screen and (max-width:500px){
+
+.page .options{
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+
+}   
+}
 </style>

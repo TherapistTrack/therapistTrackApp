@@ -134,11 +134,21 @@ const setSelected = (val) => {
 }
 
 @media only screen and (max-width:920px){
-    .sideBar .logo{
+
+    .sideBar .top .logo{
         content: url('../../assets/LogoSoloMono.png');
         width: 5vh;
+        min-width: 5vh;
         height: 5vh;
         padding: 0;
     }
+}
+
+@media only screen and (max-width:1020px){
+
+    .sideBar .bottom{
+        grid-template-columns: unset;
+
+    }   
 }
 </style>

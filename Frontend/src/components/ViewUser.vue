@@ -46,7 +46,6 @@ export default {
 }
 </script>
 
-
 <style>
 .overlayContainer {
     background-color: rgba(0, 0, 0, 0.4);
