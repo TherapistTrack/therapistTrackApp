@@ -1,0 +1,75 @@
+# Backend para theapistTrackApp
+
+Este proyecto es el backend para theapistTrackApp la cual se encarga de ordenar los docuemntos de psicologos. 
+Utiliza Node.js y Express para proporcionar una API REST que interactúa con una base de datos MongoDB, gestionando autenticación, manejo de archivos y operaciones CRUD para pacientes y médicos.
+
+## Comenzando
+
+Estas instrucciones te permitirán obtener una copia del proyecto en funcionamiento en tu máquina local para fines de desarrollo y pruebas.
+
+### Prerrequisitos
+
+Necesitas tener instalado Node.js y npm en tu computadora. Opcionalmente, puedes usar Docker para contenerizar la aplicación.
+
+### Instalación
+
+Sigue estos pasos para iniciar el proyecto en tu máquina local:
+
+1. Clonar el repositorio:
+   ```bash
+   git clone https://github.com/TherapistTrack/therapistTrackApp.git
+
+2. Instalar las dependencias del proyecto:
+   ```bash
+   npm install
+   
+3. Copiar el archivo .env.example a .env y ajustar las variables de entorno necesarias.
+
+4. Ejecutar el servidor:
+   ```bash
+   npm start
+   
+## Uso de la API
+
+La API permite realizar operaciones autenticadas relacionadas con la gestión de usuarios y pacientes. Las rutas principales incluyen:
+
+### Autenticación
+  ```bash
+  POST /api/login
+  Body:
+  {
+    "username": "ejemplo",
+    "password": "password"
+  }
+  ```
+
+### Ejemplo de Uso
+
+Para ver ejemplos detallados de cómo interactuar con la API, consulta la sección de documentación de Swagger.
+
+## Documentación de la API
+
+Accede a la documentación interactiva de la API generada con Swagger visitando:
+
+  ```bash
+  http://localhost:3001/api-docs
+  ```
+Esta documentación proporciona una interfaz para probar todas las rutas disponibles y ver sus especificaciones.
+
+### Construido con
+
+Node.js - El entorno de ejecución para JavaScript.
+Express - El framework web utilizado.
+Mongoose - ORM para MongoDB.
+
+## Licencia 
+
+Este proyecto está licenciado bajo la Universidad del Valle de Guatemala
+
+## Agradecimeintos 
+
+Agradecimiento a todos los que contribuyeron al proyecto.
+Inspiración, uso de código, etc.
+
+
+Este README proporciona una guía completa para cualquier desarrollador que trabaje en tu proyecto, incluyendo cómo iniciar el proyecto, cómo usar la API, y dónde encontrar la documentación importante. Asegúrate de personalizar los enlaces y los detalles específicos según tu proyecto real antes de publicarlo.
