@@ -43,10 +43,10 @@
         <!--- Campos condicionales para "Doctor" --->
         <template v-if="user.role === 'Doctor'">
           <div class="form-group">
-            <label for="specialty">No. Colegiado</label>
+            <label for="membershipNumber">No. Colegiado</label>
             <input
-              id="specialty"
-              v-model="user.specialty"
+              id="membershipNumber"
+              v-model="user.membershipNumber"
               type="text"
               placeholder="Escribe tu No. de Colegiado"
             />
@@ -77,8 +77,8 @@
             <input id="startDate" v-model="user.startDate" type="date" />
           </div>
           <div class="form-group">
-            <label for="startDate">Fecha Final </label>
-            <input id="startDate" v-model="user.startDate" type="date" />
+            <label for="endDate">Fecha Final </label>
+            <input id="endDate" v-model="user.endDate" type="date" />
           </div>
         </template>
 
@@ -96,6 +96,7 @@
 import { ref, computed } from 'vue'
 
 export default {
+  name: 'CreateUser',
   setup() {
     const user = ref({
       firstName: '',
@@ -109,14 +110,11 @@ export default {
       endDate: ''
     })
 
-    // Computed property para la validación
     const isFormValid = computed(() => {
-      // Validaciones básicas
       const basicInfoValid =
         user.value.firstName && user.value.lastName && user.value.phone && user.value.role
       let roleSpecificValid = true
 
-      // Validaciones específicas por rol
       if (user.value.role === 'Doctor') {
         roleSpecificValid = user.value.membershipNumber && user.value.specialty && user.value.email
       } else if (user.value.role === 'Asistente') {
@@ -126,12 +124,42 @@ export default {
       return basicInfoValid && roleSpecificValid
     })
 
-    const createUser = () => {
+    const createUser = async () => {
       if (isFormValid.value) {
-        console.log('Creating user:', user.value)
-        // Aquí implementarías la lógica para enviar los datos al API
+        try {
+          const response = await fetch('http://localhost:3001/user/register', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+              username: user.value.email,
+              password: 'defaultPassword', // Placeholder password
+              salt: 'defaultSalt', // Placeholder salt
+              name: user.value.firstName,
+              lastName: user.value.lastName,
+              phones: [user.value.phone],
+              role: user.value.role,
+              mails: [user.value.email],
+              collegiateNumber: user.value.membershipNumber,
+              specialty: user.value.specialty,
+              startDate: user.value.startDate,
+              endDate: user.value.endDate,
+              DPI: 'defaultDPI' // Placeholder DPI
+            })
+          })
+
+          if (!response.ok) {
+            throw new Error('Error al crear el usuario')
+          }
+
+          const data = await response.json()
+          console.log('Usuario creado exitosamente:', data)
+        } catch (error) {
+          console.error('Error:', error)
+        }
       } else {
-        console.error('Form is invalid')
+        console.error('Formulario inválido')
       }
     }
 
@@ -207,5 +235,16 @@ button:hover {
 
 .button-container button:disabled {
   cursor: not-allowed;
+}
+
+@media (max-width: 768px) {
+  .create-user-form {
+    width: 90%;
+    padding: 1rem;
+  }
+
+  .button-container button {
+    width: 100%;
+  }
 }
 </style>
