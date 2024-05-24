@@ -1,4 +1,4 @@
-const findUsuario = require('../models/dbqueries')
+const findUsuario = require('../models/userModel')
 const hashPassword = require('./hashing')
 
 async function authenticate(username, password) {
