@@ -40,7 +40,7 @@
           </select>
         </div>
 
-        <!-- Campos condicionales para "Doctor" -->
+        <!--- Campos condicionales para "Doctor" --->
         <template v-if="user.role === 'Doctor'">
           <div class="form-group">
             <label for="specialty">No. Colegiado</label>
