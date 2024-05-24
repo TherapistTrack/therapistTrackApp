@@ -47,36 +47,22 @@ const loading = ref(false)
 
 onMounted(async () => {
     loading.value = true
-    // simulation time
+
+    fetchData('http://localhost:3001/user/list')
+    .then(data => {
+        if (data) {
+            fetchedData.value = data
+            // Do something with the fetched data
+        } else {
+            console.log('Failed to fetch data');
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
     await new Promise(resolve => setTimeout(resolve, 5000));
 
-    // fetchData for when the backend gets deployed
-    // fetchedData.value = await fetchData(); 
-    fetchedData.value = {
-        1: {
-            nombre: 'Daniel Rayo',
-            rol: 'Doctor',
-            telefonos: ['555 555', '222 222'],
-            numColegiado: 32115,
-            correos: ['aaa@gmail.com', 'bbb@gmail.com']
-        },
-        2: {
-            nombre: 'Sofia de la Rosa',
-            rol: 'Doctor',
-            telefonos: ['444 444', '333 333'],
-            numColegiado: 53515,
-            correos: ['ccc@gmail.com', 'ddd@gmail.com']
-        },
-        3: {
-            nombre: 'Ricardo Morales Sagastume',
-            rol: 'Asistente',
-            telefonos: ['111 111', '777 777'],
-            numColegiado: null,
-            correos: ['eee@gmail.com']
-        }
-    }
     loading.value = false
-    return fetchedData
 });
 
 const clork = () => {
