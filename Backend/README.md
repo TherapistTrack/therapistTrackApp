@@ -25,9 +25,32 @@ Sigue estos pasos para iniciar el proyecto en tu máquina local:
    
 3. Copiar el archivo .env.example a .env y ajustar las variables de entorno necesarias.
 
-4. Ejecutar el servidor:
+### Ejecución
+Para ejecutar la aplicación en un entorno de desarrollo, puedes utilizar Node.js o Docker Compose:
+
+#### Usando Node.js: 
+
    ```bash
    npm start
+   ```
+
+#### Usando Docker Compose:
+
+Para iniciar los servicios
+
+   ```bash
+   docker-compose up
+   ```
+Para detener y eliminar los contenedores creados
+
+   ```bash
+   docker-compose down -v
+   ```
+Para reconstruir los contenedores después de realizar cambios
+
+   ```bash
+   docker-compose build
+   ```
    
 ## Uso de la API
 
