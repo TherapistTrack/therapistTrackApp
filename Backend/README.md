@@ -81,18 +81,6 @@ Esta documentación proporciona una interfaz para probar todas las rutas disponi
 
 ### Construido con
 
-Node.js - El entorno de ejecución para JavaScript.
-Express - El framework web utilizado.
-Mongoose - ORM para MongoDB.
-
-## Licencia 
-
-Este proyecto está licenciado bajo la Universidad del Valle de Guatemala
-
-## Agradecimeintos 
-
-Agradecimiento a todos los que contribuyeron al proyecto.
-Inspiración, uso de código, etc.
-
-
-Este README proporciona una guía completa para cualquier desarrollador que trabaje en tu proyecto, incluyendo cómo iniciar el proyecto, cómo usar la API, y dónde encontrar la documentación importante. Asegúrate de personalizar los enlaces y los detalles específicos según tu proyecto real antes de publicarlo.
+- Node.js - El entorno de ejecución para JavaScript.
+- Express - El framework web utilizado.
+- Mongoose - ORM para MongoDB.
