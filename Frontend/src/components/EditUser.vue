@@ -91,6 +91,7 @@
 import { ref, computed } from 'vue'
 
 export default {
+  name: 'EditUser',
   setup() {
     const user = ref({
       firstName: '',
@@ -116,12 +117,38 @@ export default {
       return basicInfoValid && roleSpecificValid
     })
 
-    const updateUser = () => {
+    const updateUser = async () => {
       if (isFormValid.value) {
-        console.log('Updating user:', user.value)
-        // Implementar llamada a API para actualizar los datos
+        try {
+          const response = await fetch('http://localhost:3001/user/update', {
+            method: 'PUT',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+              username: user.value.email,
+              name: user.value.firstName,
+              lastName: user.value.lastName,
+              phones: [user.value.phone],
+              collegiateNumber: user.value.membershipNumber,
+              specialty: user.value.specialty,
+              mails: [user.value.email],
+              startDate: user.value.startDate,
+              endDate: user.value.endDate
+            })
+          })
+
+          if (!response.ok) {
+            throw new Error('Error al actualizar el usuario')
+          }
+
+          const data = await response.json()
+          console.log('Usuario actualizado exitosamente:', data)
+        } catch (error) {
+          console.error('Error:', error)
+        }
       } else {
-        console.error('Form is invalid')
+        console.error('Formulario inválido')
       }
     }
 
@@ -188,5 +215,16 @@ button:hover {
 }
 .button-container button:disabled {
   cursor: not-allowed;
+}
+
+@media (max-width: 768px) {
+  .edit-user-form {
+    width: 90%;
+    padding: 1rem;
+  }
+
+  .button-container button {
+    width: 100%;
+  }
 }
 </style>
