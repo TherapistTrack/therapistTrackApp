@@ -1,0 +1,55 @@
+@import url('./typography.css');
+
+:root {
+  /* BASE COLORS */
+  --white: #f0f0f0;
+  --black: #000;
+  --green-1: #068e65;
+  --green-2: #1bb889;
+  --yellow-1: #f9bb41;
+  --yellow-2: #ffde9d;
+  --light-yellow-1: #feeed0;
+  --red-1: #ca2446;
+  --light-blue-1: #c5cefb;
+  --light-blue-2: #a8b6ff;
+  --blue-1: #4a63f1;
+  --dark-blue-1: #2d3b88;
+
+  --dark-1: #222429;
+  --gray-1: #6e6e6e;
+  --gray-2: #b7b7b7;
+  --gray-3: #e9e9e9;
+}
+
+/* semantic color variables for this project */
+:root {
+  --background: var(--white);
+  --text: var(--black);
+  --primary: var(--blue-1);
+  --primary-light: var(--light-blue-1);
+  --secondary: var(--green-1);
+  --accent: var(--yellow-1);
+  --accent-light: var(--yellow-2);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-weight: normal;
+  font-family: 'MotivaSansLighter';
+  font-style: normal;
+  color: var(--black);
+}
+
+body {
+  min-height: 100vw;
+  min-height: 100vh;
+  color: var(--text);
+  background: var(--background);
+
+  line-height: 1.6;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}

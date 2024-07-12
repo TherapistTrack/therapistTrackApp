@@ -1,6 +1,5 @@
 <template>
   <div id="app">
-    <!-- La condición v-if se puede remover si no necesitas mostrar ningún otro enlace en la barra de navegación -->
     <router-view />
   </div>
 </template>
@@ -13,16 +12,13 @@ export default {
 
 <style>
 #app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  color: #2c3e50;
-  margin-top: 60px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
   margin: 0;
   padding: 0;
+  width: 100vw;
+  height: 100vh;
 }
+
+/* Intentar no usar etiquetas HTML en CSS, mejor usar CLASES CUSTOM.
 nav {
   background-color: #f4f4f4;
   padding: 1rem;
@@ -39,4 +35,5 @@ nav a {
 nav a.router-link-active {
   color: #42b983;
 }
+*/
 </style>
