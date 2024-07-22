@@ -15,6 +15,8 @@ tags:
     description: Gestión de usuarios, incluyendo registro, actualización y eliminación.
   - name: Operaciones de archivo
     description: Operaciones relacionadas con la gestión de archivos.
+  - name: Doctor Configuration
+    description: Operaciones relacionadas con la configuración de doctores, incluyendo la gestión de plantillas y campos.
 
 paths:
   /upload:
@@ -465,7 +467,7 @@ paths:
   /doctor/addFieldToPatientTemplate:
     put:
       tags:
-        - Gestión de usuarios
+        - Doctor Configuration
       summary: Agregar campo a la plantilla de paciente
       description: Permite a los doctores añadir un nuevo campo a la plantilla de paciente existente.
       parameters:
@@ -576,7 +578,7 @@ paths:
   /doctor/editPatientTemplateFields:
     put:
       tags:
-        - Gestión de usuarios
+        - Doctor Configuration
       summary: Editar campos de la plantilla de paciente
       description: Permite a los doctores editar campos existentes en la plantilla de paciente.
       parameters:
@@ -697,7 +699,7 @@ paths:
   /doctor/createFileTemplate:
     put:
       tags:
-        - Gestión de usuarios
+        - Doctor Configuration
       summary: Crear plantilla de archivo
       description: Permite a los doctores crear una plantilla de archivo con categorías y metadatos específicos.
       parameters:
@@ -819,7 +821,7 @@ paths:
   /doctor/addFieldToFileTemplate:
     put:
       tags:
-        - Gestión de usuarios
+        - Doctor Configuration
       summary: Agregar campo a la plantilla de archivo
       description: Permite a los doctores añadir un nuevo campo a la plantilla de archivo existente.
       parameters:
@@ -924,7 +926,7 @@ paths:
   /doctor/editFileTemplateFields:
     put:
       tags:
-        - Gestión de usuarios
+        - Doctor Configuration
       summary: Editar campos de la plantilla de archivo
       description: Permite a los doctores editar campos existentes en la plantilla de archivo.
       parameters:
@@ -1035,7 +1037,7 @@ paths:
   /doctor/deletePatientTemplateField:
     put:
       tags:
-        - Gestión de usuarios
+        - Doctor Configuration
       summary: Eliminar un campo de la plantilla de paciente
       description: Permite a los doctores eliminar un campo específico de la plantilla de paciente.
       parameters:
@@ -1116,7 +1118,7 @@ paths:
   /doctor/deleteFileTemplateField:
     put:
       tags:
-        - Gestión de usuarios
+        - Doctor Configuration
       summary: Eliminar un campo de la plantilla de archivo
       description: Permite a los doctores eliminar un campo específico de la plantilla de archivo.
       parameters:
